@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  database: fix_farmville_dev
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  database: fix_farmville_test
+  pool: 5
+  timeout: 5000
