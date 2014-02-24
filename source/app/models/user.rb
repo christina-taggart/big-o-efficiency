@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :karma_points
 
   attr_accessible :first_name, :last_name, :email, :username
+  before_save :update_karma_points
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true
@@ -31,7 +32,6 @@ class User < ActiveRecord::Base
 
   def update_karma_points
     self.karma_sum = total_karma
-    self.save
   end
 
   def self.top_karma(count)
