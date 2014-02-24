@@ -1,17 +1,13 @@
 development:
   adapter: postgresql
   host: localhost
-  username:
-  password:
-  database: sketchy_overflow_dev
+  database: karmaville_dev
   pool: 5
   timeout: 5000
 
 test:
   adapter: postgresql
   host: localhost
-  username:
-  password:
-  database: sketchy_overflow_test
+  database: karmaville_test
   pool: 5
   timeout: 5000
