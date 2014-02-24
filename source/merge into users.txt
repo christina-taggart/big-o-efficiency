@@ -1,0 +1,28 @@
+merge into users u
+using (select users.id as id, SUM(karma_points.value) as karma_sum from users join karma_points on users.id = karma_points.user_id group by users.id order by SUM(karma_points.value) ) k
+on (u.id = k.id)
+when matched then
+update set u.karma_sum = k.sum
+
+====
+
+BEGIN;
+
+CREATE TEMPORARY TABLE k(id integer, karma_sum integer);
+
+INSERT INTO k(id, karma_sum) VALUES (2, 'Joe'), (3, 'Alan');
+
+LOCK TABLE users IN EXCLUSIVE MODE;
+
+UPDATE users
+SET karma_sum = karma_sums.karma_sum
+FROM karma_sums
+WHERE karma_sums.id = users.id;
+
+INSERT INTO users
+SELECT karma_sums.id, karma_sums.karma_sum
+FROM karma_sums
+LEFT OUTER JOIN users ON (users.id = karma_sums.id)
+WHERE users.id IS NULL;
+
+COMMIT;
