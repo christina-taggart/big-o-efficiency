@@ -86,6 +86,8 @@ GEM
       activesupport (= 3.2.12)
       bundler (~> 1.0)
       railties (= 3.2.12)
+    rails_db_info (0.1.9)
+      rails (>= 3.1.0)
     railties (3.2.12)
       actionpack (= 3.2.12)
       activesupport (= 3.2.12)
@@ -151,6 +153,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 3.2.12)
+  rails_db_info
   rspec
   rspec-rails
   sass-rails (~> 3.2.3)
