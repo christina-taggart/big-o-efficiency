@@ -28,4 +28,13 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def update_karma_points
+    self.karma_sum = total_karma
+    self.save
+  end
+
+  def self.top_karma(count)
+    user_array = User.find_by_sql "Select * from users order by karma_sum DESC limit #{count}"
+  end
 end
