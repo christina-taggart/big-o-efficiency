@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessible :total_karma
+
   has_many :karma_points
 
   attr_accessible :first_name, :last_name, :email, :username
@@ -17,12 +19,8 @@ class User < ActiveRecord::Base
             :format => {:with => /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i},
             :uniqueness => {:case_sensitive => false}
 
-  def self.by_karma
-    joins(:karma_points).group('users.id').order('SUM(karma_points.value) DESC')
-  end
-
-  def total_karma
-    self.karma_points.sum(:value)
+  def self.by_karma(num_of_records=1)
+    User.find(:all, :order => "total_karma DESC", :limit => num_of_records)
   end
 
   def full_name
